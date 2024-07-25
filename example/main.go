@@ -2,14 +2,15 @@ package main
 
 import (
 	"fmt"
-	"valo"
+
+	"github.com/benebobaa/valo"
 )
 
 type User struct {
-	Name    string   `valo:"notblank,sizeMin=2,sizeMax=50"`
-	Age     int      `valo:"min=18,max=120"`
-	Friends []string `valo:"notnil"`
-	Address Address  `valo:"valid"`
+	Name string `valo:"notblank,sizeMin=2,sizeMax=50"`
+	Age  int    `valo:"min=1,max=120"`
+	// Friends []string `valo:"notnil"`
+	Address Address `valo:"valid"`
 }
 
 type Address struct {
@@ -21,7 +22,7 @@ type Address struct {
 func main() {
 	user := User{
 		Name: "Okay",
-		Age:  30,
+		Age:  1,
 		Address: Address{
 			Street:  "Jalan Depan Gang",
 			City:    "Kokas Macet",
