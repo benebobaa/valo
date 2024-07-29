@@ -20,7 +20,7 @@ func validateSizeMin(param string, value reflect.Value) error {
 	}
 
 	switch value.Kind() {
-	case reflect.String:
+	case reflect.String, reflect.Slice:
 		if value.Len() < min {
 			return ErrSizeMin
 		}
@@ -35,7 +35,7 @@ func validateSizeMax(param string, value reflect.Value) error {
 	}
 
 	switch value.Kind() {
-	case reflect.String:
+	case reflect.String, reflect.Slice:
 		if value.Len() > max {
 			return ErrSizeMax
 		}

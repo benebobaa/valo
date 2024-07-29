@@ -39,6 +39,12 @@ func validateStruct(v reflect.Value) error {
 					if err := validateStruct(value); err != nil {
 						return errors.New(field.Name + ": " + err.Error())
 					}
+				} else if value.Kind() == reflect.Ptr && value.Type().Elem().Kind() == reflect.Struct {
+					if !value.IsNil() {
+						if err := validateStruct(value.Elem()); err != nil {
+							return errors.New(field.Name + ": " + err.Error())
+						}
+					}
 				}
 			} else {
 				if err := runValidator(validatorName, validatorValue, value); err != nil {
