@@ -107,6 +107,8 @@ func runValidator(name, param string, value reflect.Value, fieldName string) err
 		return validateSizeMin(param, value, fieldName)
 	case "sizeMax":
 		return validateSizeMax(param, value, fieldName)
+	case "email":
+		return validateEmail(value, fieldName)
 	}
 	return ValidationError{Field: fieldName, Message: fmt.Sprintf("unknown validator: %s", name)}
 }
