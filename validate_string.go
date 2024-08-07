@@ -3,6 +3,7 @@ package valo
 import (
 	"fmt"
 	"reflect"
+	"regexp"
 	"strconv"
 	"strings"
 )
@@ -47,6 +48,19 @@ func validateSizeMax(param string, value reflect.Value, fieldName string) error 
 		}
 	default:
 		return ValidationError{Field: fieldName, Message: "sizemax validator can only be used on strings, slices, maps, or arrays"}
+	}
+	return nil
+}
+
+func validateEmail(value reflect.Value, fieldName string) error {
+	if value.Kind() != reflect.String {
+		return ValidationError{Field: fieldName, Message: "email validator can only be used on string fields"}
+	}
+	email := value.String()
+
+	emailRegex := regexp.MustCompile(`^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`)
+	if !emailRegex.MatchString(email) {
+		return ValidationError{Field: fieldName, Message: "invalid email format"}
 	}
 	return nil
 }

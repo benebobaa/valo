@@ -8,6 +8,7 @@ import (
 
 type User struct {
 	Name     string    `valo:"notblank,sizeMin=2,sizeMax=50"`
+	Email    string    `valo:"email"`
 	Age      int       `valo:"min=1,max=120"`
 	Friends  []string  `valo:"notnil,sizeMin=1"`
 	Address  Address   `valo:"valid"`
@@ -29,6 +30,7 @@ func main() {
 	user := User{
 		Name:    "Okay",
 		Age:     1,
+		Email:   "bene@beneboba.me",
 		Friends: []string{""},
 		Address: Address{
 			Street:  "Jalan Depan Gang",
